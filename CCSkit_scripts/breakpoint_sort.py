@@ -23,7 +23,7 @@ def breakpoint_sort(split):
 			elif line[4]=='right':
 				left='0'
 				right='1'
-			breakpoint.append([line[0],line[1],line[2],'INS','0',hp,left,right,'1'])
+			breakpoint.append([line[0],line[1],line[2],'INS','-',hp,left,right,'1'])
 	breakpoint_sorted=sorted(breakpoint,key=lambda x: (x[5],x[0],int(x[1])))
 	pre=[]
 	for x in range(len(breakpoint_sorted)):

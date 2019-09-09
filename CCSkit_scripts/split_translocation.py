@@ -27,7 +27,7 @@ def split_translocation(split):
 				m2=re.search(r'^(chr)*[\dXY]',right[0])
 				if not m2:
 					continue
-				translocation.append([left[0],left[2],right[0]+':'+right[2],'TRANS','0',hp,line[11],sa[0],right[0],right[2]])
+				translocation.append([left[0],left[2],right[0]+':'+right[2],'TRANS','-',hp,line[11],sa[0],right[0],right[2]])
 	translocation_sorted=sorted(translocation,key=lambda x: (x[5],x[0],int(x[1]),x[8],int(x[9])))
 	for x in range(len(translocation_sorted)):
 		translocation_file.write(('\t'.join(str(n) for n in translocation_sorted[x][0:8]))+'\n')
