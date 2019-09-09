@@ -31,7 +31,7 @@ export PATH=$PWD/CCSkit/:$PATH
 
 CCSkit needs two files as inputs. The first is a bam file from CCS long read alignment. The second is the genome reference (FASTA format).
 ```
-python CCSkit.py -b <bam file> -g <genome.mmi>
+python CCSkit.py -b <bam file> -g <genome.fa>
 ```
 
 
