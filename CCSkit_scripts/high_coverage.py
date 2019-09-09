@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import subprocess,re,sys,warnings
+import subprocess,re,sys,warnings,os
 from math import sqrt
 
 def high_coverage(bam,chromo,fold):
