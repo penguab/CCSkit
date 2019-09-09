@@ -46,7 +46,7 @@ def sv_vcf(chromosome):
 	for y in range(len(SV_sort)):
 		if SV_sort[y][3]=="DEL":
 			SV_out.write(SV_sort[y][0]+"\t"+SV_sort[y][1]+"\t.\t.\t.\t.\t.\t"+"SVTYPE=DEL;SVLEN="+SV_sort[y][4]+";Depth="+SV_sort[y][6]+"\tHP:GT"+"\t"+SV_sort[y][5]+"\n")
-		elif SV_sort[y][3]=="INS":
+		elif SV_sort[y][3]=="INS" or SV_sort[y][3]=="DUP":
 			SV_out.write(SV_sort[y][0]+"\t"+SV_sort[y][1]+"\t.\t.\t.\t.\t.\t"+"SVTYPE=INS;SVLEN="+SV_sort[y][4]+";Depth="+SV_sort[y][6]+"\tHP:GT"+"\t"+SV_sort[y][5]+"\n")
 		elif SV_sort[y][3]=="INV":
 			SV_out.write(SV_sort[y][0]+"\t"+SV_sort[y][1]+"\t.\t.\t.\t.\t.\t"+"SVTYPE=INV;SVLEN="+SV_sort[y][4]+";Depth="+SV_sort[y][6]+"\tHP:GT"+"\t"+SV_sort[y][5]+"\n")
