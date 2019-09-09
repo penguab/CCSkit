@@ -31,7 +31,7 @@ def breakpoint_sort(split):
 		if len(pre)==0:
 			pre=breakpoint_sorted[x]
 			continue
-		if breakpoint_sorted[x][5]==pre[5] and breakpoint_sorted[x][9]==pre[9] and  breakpoint_sorted[x][0]==pre[0] and int(breakpoint_sorted[x][1])-int(pre[1])<=20 and breakpoint_sorted[x][3]==pre[3]:
+		if breakpoint_sorted[x][5]==pre[5] and breakpoint_sorted[x][9]==pre[9] and  breakpoint_sorted[x][0]==pre[0] and int(breakpoint_sorted[x][1])-int(pre[1])<=50 and breakpoint_sorted[x][3]==pre[3]:
 			pre[6]=str(int(pre[6])+int(breakpoint_sorted[x][6]))
 			pre[7]=str(int(pre[7])+int(breakpoint_sorted[x][7]))
 			pre[8]=str(int(pre[8])+int(breakpoint_sorted[x][8]))
@@ -42,8 +42,6 @@ def breakpoint_sort(split):
 	if int(pre[6])>=3 or int(pre[7])>=3:
 		new_breakpoint.append(pre)
 	new_breakpoint_sorted=sorted(new_breakpoint,key=lambda x: (x[5],x[0],int(x[1])))
-	for i in range(len(new_breakpoint_sorted)):
-		print(new_breakpoint_sorted[i])
 	new_pre=[]
 	for x in range(len(new_breakpoint_sorted)):
 		if len(new_pre)==0:

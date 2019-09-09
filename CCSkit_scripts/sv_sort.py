@@ -14,9 +14,9 @@ def sv_sort(breakpoint):
 			if len(pre)==0:
 				pre=line[0:6]+['1']
 				continue
-			if line[3]=='TRANS' and  line[5]==pre[5] and  int(line[1])-int(pre[1])<=20 and line[3]==pre[3]:
+			if line[3]=='TRANS' and  line[5]==pre[5] and  int(line[1])-int(pre[1])<=50 and line[3]==pre[3]:
 				pre[6]=str(int(pre[6])+1)
-			elif line[5]==pre[5] and  line[0]==pre[0] and int(line[1])-int(pre[1])<=20 and line[3]==pre[3] and int(line[4])/int(pre[4])>=0.8 and int(line[4])/int(pre[4])<=1.2:
+			elif line[5]==pre[5] and  line[0]==pre[0] and int(line[1])-int(pre[1])<=50 and line[3]==pre[3] and int(line[4])/int(pre[4])>=0.8 and int(line[4])/int(pre[4])<=1.2:
 				pre[6]=str(int(pre[6])+1)
 			else:
 				if int(pre[6])>=3:

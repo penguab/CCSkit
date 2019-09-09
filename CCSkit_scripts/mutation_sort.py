@@ -23,7 +23,7 @@ def mutation_sort(breakpoint):
 		if x==0:
 			pre=total_sort[x]+['1']
 			continue
-		if total_sort[x][5]==pre[5] and  total_sort[x][0]==pre[0] and int(total_sort[x][1])-int(pre[1])<=20 and total_sort[x][3]==pre[3] and int(total_sort[x][4])/int(pre[4])>=0.8 and int(total_sort[x][4])/int(pre[4])<=1.2:
+		if total_sort[x][5]==pre[5] and  total_sort[x][0]==pre[0] and int(total_sort[x][1])-int(pre[1])<=50 and total_sort[x][3]==pre[3] and int(total_sort[x][4])/int(pre[4])>=0.8 and int(total_sort[x][4])/int(pre[4])<=1.2:
 			pre[6]=str(int(pre[6])+1)
 		else:
 			if int(pre[6])>=3:
