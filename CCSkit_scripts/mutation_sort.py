@@ -13,7 +13,7 @@ def mutation_sort(breakpoint):
 				hp=line[-1]
 			else:
 				hp='hp0'
-			m=re.search(r'^\d|X|Y',line[0])
+			m=re.search(r'^\d|X|Y|M',line[0])
 			if not m:
 				continue
 			total.append([line[0],line[1],line[2],"Mutation",line[3],hp])

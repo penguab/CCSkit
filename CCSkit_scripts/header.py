@@ -11,8 +11,8 @@ def header(bam):
 		if line[0]!="@SQ":
 			continue
 		length=line[2].split(':')[1]
-		if int(length)<=40000000:
-			continue
+		#if int(length)<=40000000:
+		#	continue
 		name=line[1].split(':')[1]
 		chromosomes.append(name)
 	chro_filter=[]

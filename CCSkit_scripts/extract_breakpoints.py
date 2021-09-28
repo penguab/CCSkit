@@ -53,6 +53,7 @@ def extract_breakpoints (chromosome,bam):
 		SA=SA_p.search(l)
 		if SA:
 			sa=SA.group(0)
+			sa=re.sub('chr','',sa)
 		else:
 			sa='NA;'
 		XA=XA_p.search(l)

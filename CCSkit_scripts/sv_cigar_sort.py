@@ -13,7 +13,7 @@ def sv_cigar_sort(breakpoint):
 				hp=line[-1]
 			else:
 				hp='hp0'
-			m=re.search(r'^\d|X|Y',line[0])
+			m=re.search(r'^\d|X|Y|M',line[0])
 			if not m:
 				continue
 			event_m=re.search(r'^(\d+)(\D)$',line[3])

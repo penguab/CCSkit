@@ -22,7 +22,7 @@ def sv_sort(breakpoint):
 				if int(pre[6])>=3:
 					out.write(("\t".join(str(n) for n in pre))+"\n")
 				pre=line[0:6]+['1']
-	if int(pre[6])>=3:
+	if len(pre)!=0 and int(pre[6])>=3:
 		out.write(("\t".join(str(n) for n in pre))+"\n")
 
 if __name__=="__main__":

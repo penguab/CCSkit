@@ -6,7 +6,13 @@ def insert_size(bam,chr1):
 	def stddev(lst):
 		mean = float(sum(lst)) / len(lst)
 		return mean, sqrt(sum((x - mean)**2 for x in lst) / (len(lst)-1))
-	para1=chr1+':20000000-21000000'
+	if chr1=="chrM" or chr1=="M":
+		start = '1'
+		end = '10000'
+	else:
+		start = '20000000'
+		end = '21000000'
+	para1=chr1+':'+start+'-'+end
 	size=[]
 	number=0
 	length='0'
@@ -23,7 +29,7 @@ def insert_size(bam,chr1):
 			size.append(len(cont[9]))
 			if int(length)< len(cont[9]):
 				length=len(cont[9])
-	coverage=sum(size)/1000000
+	coverage=sum(size)/(float(end)-float(start)+1)
 	fold=int(round(float(coverage)/10))
 	if fold<3:
 		warnings.warn('Warnings: Coverage was estimated lower than 30. May cause more false positives!\n')
@@ -36,6 +42,6 @@ def insert_size(bam,chr1):
 
 if __name__=="__main__":
 	bam=sys.argv[1]
-	min_size,max_size,length,fold=insert_size(bam,1)
-	print(coverage)
+	min_size,max_size,length,fold=insert_size(bam,"chrM")
+	print(fold)
 
