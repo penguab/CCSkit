@@ -42,7 +42,7 @@ def extract_breakpoints (chromosome,bam):
 	SA_p=re.compile(r'SA:Z:([^,]+),([^,]+),[+-],([^,]+),[^\t]+')
 	whole_p=re.compile(r'^(\d+)([X=DISH])(\d+[X=DI])*(\d+)([X=DISH])$')
 	match_p=re.compile(r'^(\d+)([X=DISH])')
-
+	mask_length = 0
 	mark_test=0
 	command= subprocess.Popen(['samtools','view',bam,chromosome], stdout=subprocess.PIPE)
 	while True:
@@ -96,7 +96,7 @@ def extract_breakpoints (chromosome,bam):
 				else:
 					last_clip=m.group(1)+m.group(2)
 			if m.group(2)=="X":
-				if int(site)>=first_site+1500 and int(site)<=last_site-1500:
+				if int(site)>=first_site+mask_length and int(site)<=last_site-mask_length:
 					out_snp.write(line[2]+'\t'+pos+'\t'+str(int(pos)+int(m.group(1)))+'\t'+m.group(1)+'X\t'+seq[int(site):(int(site)+int(m.group(1)))]+'\t'+'\t'.join(line[0:5])+'\t'+str(total_len)+'\n')
 				pos=str(int(pos)+int(m.group(1)))
 				site=str(int(site)+int(m.group(1)))
@@ -105,7 +105,7 @@ def extract_breakpoints (chromosome,bam):
 			if m.group(2)=="=" :
 				pos=str(int(pos)+int(m.group(1)))
 				site=str(int(site)+int(m.group(1)))
-				if int(line[1])<2048 and int(line[1])%512 <256 and int(site)>=first_site+1500 and int(site)<=last_site-1500: 
+				if int(line[1])<2048 and int(line[1])%512 <256 and int(site)>=first_site+mask_length and int(site)<=last_site-mask_length: 
 					if int(site)-int(mutation_pre_site)<=10 and int(pos)-int(mutation_pre_pos)<=10:
 						if mutation_start=='':
 							mutation_start=pos
@@ -120,21 +120,21 @@ def extract_breakpoints (chromosome,bam):
 					mutation_pre_pos=pos
 				match=match+int(m.group(1))
 			if m.group(2)=="D":
-				if int(m.group(1))<50 and int(site)>=first_site+1500 and int(site)<=last_site-1500:
+				if int(m.group(1))<50 and int(site)>=first_site+mask_length and int(site)<=last_site-mask_length:
 					out_indel.write(line[2]+'\t'+pos+'\t'+str(int(pos)+int(m.group(1)))+'\t'+m.group(1)+'D\t'+'-'+'\t'+'\t'.join(line[0:5])+'\t'+str(total_len)+'\n')
-				if int(m.group(1))>=50 and int(site)>=first_site+1500 and int(site)<=last_site-1500:
+				if int(m.group(1))>=50 and int(site)>=first_site+mask_length and int(site)<=last_site-mask_length:
 					out_sv.write(line[2]+'\t'+pos+'\t'+str(int(pos)+int(m.group(1)))+'\t'+m.group(1)+'D\t'+'-'+'\t'+'\t'.join(line[0:5])+'\t'+str(total_len)+'\n')
 				pos=str(int(pos)+int(m.group(1)))
 				sv=sv-int(m.group(1))
 			if m.group(2)=="I":
-				if int(m.group(1))<50 and int(site)>=first_site+1500 and int(site)<=last_site-1500:
+				if int(m.group(1))<50 and int(site)>=first_site+mask_length and int(site)<=last_site-mask_length:
 					out_indel.write(line[2]+'\t'+pos+'\t'+str(int(pos)+1)+'\t'+m.group(1)+'I\t'+seq[int(site):(int(site)+int(m.group(1)))]+'\t'+'\t'.join(line[0:5])+'\t'+str(total_len)+'\n')
-				if int(m.group(1))>=50 and int(site)>=first_site+1500 and int(site)<=last_site-1500:
+				if int(m.group(1))>=50 and int(site)>=first_site+mask_length and int(site)<=last_site-mask_length:
 					out_sv.write(line[2]+'\t'+pos+'\t'+str(int(pos)+1)+'\t'+m.group(1)+'I\t'+seq[int(site):(int(site)+int(m.group(1)))]+'\t'+'\t'.join(line[0:5])+'\t'+str(total_len)+'\n')
 				site=str(int(site)+int(m.group(1)))
 				sv=sv+int(m.group(1))
 			cigar=cigar[len(m.group(0)):]
-		if int(line[1])<2048 and int(line[1])%512 <256 and mutation_num>=5 and int(site)>=first_site+1500 and int(site)<=last_site-1500:
+		if int(line[1])<2048 and int(line[1])%512 <256 and mutation_num>=5 and int(site)>=first_site+mask_length and int(site)<=last_site-mask_length:
 			out_mutation.write(line[2]+'\t'+mutation_start+'\t'+mutation_end+'\t'+str(mutation_num)+'\t'+'_'.join(mutation_cigar)+'\t'+'\t'.join(line[0:5])+'\t'+str(total_len)+'\n')
 		if int(line[1])%32 <16:
 			direction='+'
